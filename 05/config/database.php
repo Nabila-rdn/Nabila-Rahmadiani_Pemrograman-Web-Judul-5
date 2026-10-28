@@ -6,9 +6,9 @@
  */
 
 class Database {
-    private string $host = '127.0.0.1';
+    private string $host = 'localhost';
     private string $db_name = 'database';
-    private string $username = 'root';
+    private string $username = 'mahasiswa_user';
     private string $password = '';
     private int $port = 3307;
     private ?PDO $conn = null;
@@ -21,7 +21,7 @@ class Database {
      */
     public function getConnection(): PDO {
         if ($this->conn === null) {
-            $dsn = "mysql:host={$this->host};port={$this->port};dbname={$this->db_name};charset=utf8mb4";
+            $dsn = $dsn = "mysql:host=localhost;port=3307;dbname={$this->db_name};charset=utf8mb4";
             $options = [
                 PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
