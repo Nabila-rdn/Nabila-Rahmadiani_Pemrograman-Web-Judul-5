@@ -6,11 +6,11 @@
  */
 
 class Database {
-    private string $host = '127.0.0.1';
-    private string $db_name = 'db_mahasiswa';
-    private string $username = 'root';
+    private string $host = 'localhost';
+    private string $db_name = 'database';
+    private string $username = 'mahasiswa_user';
     private string $password = '';
-    private int $port = 3306;
+    private int $port = 3307;
     private ?PDO $conn = null;
 
     /**
@@ -21,7 +21,7 @@ class Database {
      */
     public function getConnection(): PDO {
         if ($this->conn === null) {
-            $dsn = "mysql:host={$this->host};port={$this->port};dbname={$this->db_name};charset=utf8mb4";
+            $dsn = $dsn = "mysql:host=localhost;port=3307;dbname={$this->db_name};charset=utf8mb4";
             $options = [
                 PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
@@ -29,7 +29,11 @@ class Database {
             ];
 
            // Percobaan 5-1 Langkah 4
-           
+           try {
+               $this->conn = new PDO($dsn, $this->username, $this->password, $options);
+           } catch (PDOException $e) {
+               throw new PDOException("Koneksi ke basis data gagal: " . $e->getMessage(), (int)$e->getCode());
+           }
         }
 
         return $this->conn;
